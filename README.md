@@ -31,6 +31,13 @@ The following **additional** features are implemented:
 
 * [ ] TODO: List anything else that you added to improve the site's functionality!
 
+## Video Walkthrough
+
+Here's a walkthrough of implemented required features:
+
+<img src='src/prework.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+
 ## Notes
 
 TODO: Describe any challenges encountered while building the app or any additional context you'd like to add.
