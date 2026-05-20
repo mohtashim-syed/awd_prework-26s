@@ -4,7 +4,7 @@ Submitted by: **Mohtashim Syed**
 
 About this web app: **Creatorverse is a React + Supabase web app for managing a personal universe of content creators. Users can browse all creators on the homepage, view a single creator's details, add a new creator, edit an existing creator's information, and delete a creator from the database.**
 
-Time spent: **TODO: X** hours
+Time spent: 9 hours
 
 ## Required Features
 
@@ -23,7 +23,7 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] Picocss is used to style HTML elements
+- [x] Picocss is used to style HTML elements
 - [x] The content creator items are displayed in a creative format, like cards instead of a list
 - [x] An image of each content creator is shown on their content creator card
 
@@ -35,12 +35,9 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-<img src='src/prework.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<video src='src/AWDPrework26S.mov' title='Video Walkthrough' width='600' controls></video>
 
-
-## Notes
-
-TODO: Describe any challenges encountered while building the app or any additional context you'd like to add.
+If the embedded player doesn't load, you can [download or view the walkthrough here](src/AWDPrework26S.mov).
 
 ## License
 

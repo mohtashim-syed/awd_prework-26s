@@ -12,16 +12,17 @@ const ShowCreators = ({ creators }) => {
             </Link>
 
             {creators && creators.length > 0 ? (
-                creators.map((creator) => (
-                    <CreatorCard
-                        key={creator.id}
-                        id={creator.id}
-                        name={creator.name}
-                        url={creator.url}
-                        description={creator.description}
-                        imageURL={creator.imageURL}
-                    />
-                ))
+                <div className="creators-grid">
+                    {creators.map((creator) => (
+                        <CreatorCard
+                            key={creator.name}
+                            name={creator.name}
+                            url={creator.url}
+                            description={creator.description}
+                            imageURL={creator.imageURL}
+                        />
+                    ))}
+                </div>
             ) : (
                 <p>No content creators have been added yet.</p>
             )}

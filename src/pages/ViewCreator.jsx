@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { supabase } from '../client';
 
 const ViewCreator = () => {
-    const { id } = useParams();
+    const { name } = useParams();
     const [creator, setCreator] = useState(null);
 
     useEffect(() => {
@@ -11,7 +11,7 @@ const ViewCreator = () => {
             const { data, error } = await supabase
                 .from('creators')
                 .select()
-                .eq('id', id)
+                .eq('name', name)
                 .single();
 
             if (error) {
@@ -23,7 +23,7 @@ const ViewCreator = () => {
         };
 
         fetchCreator();
-    }, [id]);
+    }, [name]);
 
     if (!creator) {
         return <p>Loading...</p>;
@@ -43,7 +43,7 @@ const ViewCreator = () => {
                 Visit Profile
             </a>
 
-            <Link to={`/edit/${creator.id}`}>
+            <Link to={`/edit/${encodeURIComponent(creator.name)}`}>
                 <button>Edit Creator</button>
             </Link>
         </div>

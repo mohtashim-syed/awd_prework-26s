@@ -3,23 +3,36 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { supabase } from '../client';
 
 const EditCreator = () => {
-    const { id } = useParams();
+    const { name: originalName } = useParams();
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [url, setURL] = useState('');
     const [description, setDescription] = useState('');
     const [imageURL, setImageURL] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [errorMsg, setErrorMsg] = useState('');
 
     useEffect(() => {
         const fetchCreator = async () => {
+            setLoading(true);
+            setErrorMsg('');
+
             const { data, error } = await supabase
                 .from('creators')
                 .select()
-                .eq('id', id)
+                .eq('name', originalName)
                 .single();
 
             if (error) {
                 console.error('Error fetching creator:', error);
+                setErrorMsg(`Could not load creator (name=${originalName}): ${error.message}`);
+                setLoading(false);
+                return;
+            }
+
+            if (!data) {
+                setErrorMsg(`No creator found with name=${originalName}.`);
+                setLoading(false);
                 return;
             }
 
@@ -27,10 +40,11 @@ const EditCreator = () => {
             setURL(data.url ?? '');
             setDescription(data.description ?? '');
             setImageURL(data.imageURL ?? '');
+            setLoading(false);
         };
 
         fetchCreator();
-    }, [id]);
+    }, [originalName]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -38,10 +52,11 @@ const EditCreator = () => {
         const { error } = await supabase
             .from('creators')
             .update({ name, url, description, imageURL })
-            .eq('id', id);
+            .eq('name', originalName);
 
         if (error) {
             console.error('Error updating creator:', error);
+            setErrorMsg(`Update failed: ${error.message}`);
             return;
         }
 
@@ -52,25 +67,37 @@ const EditCreator = () => {
         const { data, error } = await supabase
             .from('creators')
             .delete()
-            .eq('id', id)
+            .eq('name', originalName)
             .select();
 
         if (error) {
             console.error('Error deleting creator:', error);
+            setErrorMsg(`Delete failed: ${error.message}`);
             return;
         }
 
         if (!data || data.length === 0) {
-            console.error('Delete returned 0 rows — likely blocked by Row Level Security. Check the creators table policies in the Supabase dashboard.');
+            const msg = 'Delete returned 0 rows — likely blocked by Row Level Security. In the Supabase dashboard, open the "creators" table → Authentication → Policies and add a policy that allows DELETE for the anon role.';
+            console.error(msg);
+            setErrorMsg(msg);
             return;
         }
 
         navigate('/');
     };
 
+    if (loading) {
+        return <p>Loading creator...</p>;
+    }
+
     return (
         <div>
             <h1>Edit Creator</h1>
+
+            {errorMsg && (
+                <p style={{ color: 'crimson', whiteSpace: 'pre-wrap' }}>{errorMsg}</p>
+            )}
+
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Name:</label>

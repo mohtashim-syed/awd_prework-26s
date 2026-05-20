@@ -1,20 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const CreatorCard = ({ id, name, url, description, imageURL }) => {
+const CreatorCard = ({ name, url, description, imageURL }) => {
     return (
-        <div className="card">
-            {imageURL && <img src={imageURL} alt={`${name}'s profile`} className="card-image" width="150" />}
+        <article>
+            <Link to={`/view/${encodeURIComponent(name)}`} className="card-link">
+                {imageURL && <img src={imageURL} alt={`${name}'s profile`} className="card-image" />}
+                <h2>{name}</h2>
+                <p>{description}</p>
+            </Link>
 
-            <h2>{name}</h2>
-
-            <p>{description}</p>
             <a href={url} target="_blank" rel="noopener noreferrer">Visit Profile</a>
 
-            <Link to={`/edit/${id}`}>
+            <Link to={`/edit/${encodeURIComponent(name)}`}>
                 <button>Edit</button>
             </Link>
-        </div>
+        </article>
     );
 };
 

@@ -27,8 +27,8 @@ const App = () => {
   const element = useRoutes([
     { path: '/', element: <ShowCreators creators={creators} /> },
     { path: '/new', element: <AddCreator /> },
-    { path: '/edit/:id', element: <EditCreator /> },
-    { path: '/view/:id', element: <ViewCreator /> },
+    { path: '/edit/:name', element: <EditCreator /> },
+    { path: '/view/:name', element: <ViewCreator /> },
   ]);
 
   return <div className="App">{element}</div>;
