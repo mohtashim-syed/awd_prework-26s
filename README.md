@@ -37,7 +37,7 @@ Here's a walkthrough of implemented required features:
 
 <video src='src/AWDPrework26S.mov' title='Video Walkthrough' width='600' controls></video>
 
-If the embedded player doesn't load, you can [download or view the walkthrough here](src/AWDPrework26S.mov).
+If the embedded player doesn't load, you can [view the walkthrough here](https://youtu.be/GWlKmJSB_VY).
 
 ## License
 
